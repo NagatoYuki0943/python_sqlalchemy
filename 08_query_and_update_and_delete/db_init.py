@@ -1,9 +1,8 @@
 from sqlalchemy import create_engine, Column, Integer, String, Date
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 
-engine = create_engine('mysql://root:test@localhost/testdb', echo=True)
+engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
 Base = declarative_base()
 
 

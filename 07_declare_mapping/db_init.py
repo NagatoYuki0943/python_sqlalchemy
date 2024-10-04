@@ -1,13 +1,14 @@
 from sqlalchemy import create_engine, Column, Integer, String, Date
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
 
-engine = create_engine('mysql://root:test@localhost/testdb', echo=True)
+engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
+# 基础类
 Base = declarative_base()
 
 
 class Person(Base):
+    # 表名
     __tablename__ = "person"
 
     id = Column(Integer, primary_key=True)
@@ -16,5 +17,8 @@ class Person(Base):
     address = Column(String(255), nullable=True)
 
 
+# 创建表
 Base.metadata.create_all(engine)
-Session = sessionmaker(bind=engine)
+
+# 使用 session 代替 connection
+Session = sessionmaker(engine)

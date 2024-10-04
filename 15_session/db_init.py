@@ -14,12 +14,14 @@ class Base2(DeclarativeBase):
     pass
 
 
-engine = create_engine('mysql://root:test@localhost/testdb', echo=True)
-engine2 = create_engine('mysql://root:test@localhost/myblog_db', echo=True)
+engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
+engine2 = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
 
 
 int_pk = Annotated[int, mapped_column(primary_key=True)]
-required_unique_string = Annotated[str, mapped_column(String(128), unique=True, nullable=False)]
+required_unique_string = Annotated[
+    str, mapped_column(String(128), unique=True, nullable=False)
+]
 required_string = Annotated[str, mapped_column(String(128), nullable=False)]
 timestamp_not_null = Annotated[datetime.datetime, mapped_column(nullable=False)]
 
@@ -31,7 +33,7 @@ class User(Base2):
     name: Mapped[required_unique_string]
 
     def __repr__(self):
-        return f'id: {self.id}, name: {self.name}'
+        return f"user: id: {self.id}, name: {self.name}"
 
 
 class Department(Base):
@@ -40,10 +42,12 @@ class Department(Base):
     id: Mapped[int_pk]
     name: Mapped[required_unique_string]
 
-    employees: Mapped[List["Employee"]] = relationship(back_populates="department")
+    employees: Mapped[List["Employee"]] = relationship(
+        "Employee", back_populates="department"
+    )
 
     def __repr__(self):
-        return f'id: {self.id}, name: {self.name}'
+        return f"department: id: {self.id}, name: {self.name}"
 
 
 class Employee(Base):
@@ -54,10 +58,12 @@ class Employee(Base):
     name: Mapped[required_unique_string]
     birthday: Mapped[timestamp_not_null]
 
-    department: Mapped[Department] = relationship(back_populates="employees")
+    department: Mapped[Department] = relationship(
+        Department, back_populates="employees"
+    )
 
     def __repr__(self):
-        return f'id: {self.id}, dep_id: {self.dep_id}, name: {self.name}, birthday: {self.birthday}'
+        return f"employee: id: {self.id}, dep_id: {self.dep_id}, name: {self.name}, birthday: {self.birthday}"
 
 
 Base.metadata.create_all(engine)

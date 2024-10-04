@@ -1,11 +1,12 @@
 import sqlalchemy
 
-engine = sqlalchemy.create_engine('mysql://root:test@localhost/testdb', echo=True)
+engine = sqlalchemy.create_engine("mysql://root:root@localhost:3306/mb", echo=True)
 
 meta_data = sqlalchemy.MetaData()
 
 person_table = sqlalchemy.Table(
-    "person", meta_data,
+    "person",
+    meta_data,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("name", sqlalchemy.String(128), unique=True, nullable=False),
     sqlalchemy.Column("birthday", sqlalchemy.Date, nullable=False),

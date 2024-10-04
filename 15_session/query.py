@@ -4,10 +4,27 @@ from sqlalchemy.orm import Session
 from db_init import engine, engine2, Department, Employee, User
 
 
-with Session(engine) as session1, session1.begin(), Session(engine2) as session2, session2.begin():
-    dep = Department(name="pop2")
+# 默认开启事务
+# 如果产生任何异常，则回滚事务
+# begin 自动提交事务, 没有 begin 要手动提交事务, session.commit()
+with Session(engine) as session1:
+    with session1.begin():
+        dep = Department(name="it")
+        session1.add(dep)
+
+
+# 等价上面的代码
+with Session(engine) as session1, session1.begin():
+    dep = Department(name="it")
+    session1.add(dep)
+
+
+# 多个session
+with Session(engine) as session1, session1.begin(), Session(
+    engine2
+) as session2, session2.begin():
+    dep = Department(name="it")
     session1.add(dep)
 
     user = User(name="hhh2")
     session2.add(user)
-
