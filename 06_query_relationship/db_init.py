@@ -1,7 +1,16 @@
 import sqlalchemy
 
-engine = sqlalchemy.create_engine("mysql://root:root@localhost:3306/mb", echo=True)
-engine = sqlalchemy.create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
+# database://username:password@hostname:port/database_name
+database_type = "postgresql"
+if database_type == "mysql":
+    url = "mysql://root:root@localhost:3306/mb"
+elif database_type == "postgresql":
+    url = "postgresql://postgres:postgres@localhost:5432/mb"
+else:
+    raise ValueError("Unsupported database type")
+
+# echo=True: 显示执行的SQL语句
+engine = sqlalchemy.create_engine(url, echo=True)
 
 meta_data = sqlalchemy.MetaData()
 

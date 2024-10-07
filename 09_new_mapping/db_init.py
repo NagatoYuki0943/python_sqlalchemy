@@ -6,8 +6,18 @@ from sqlalchemy.sql import func
 from typing import Annotated
 
 
-engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
-engine = create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
+# database://username:password@hostname:port/database_name
+database_type = "postgresql"
+if database_type == "mysql":
+    url = "mysql://root:root@localhost:3306/mb"
+elif database_type == "postgresql":
+    url = "postgresql://postgres:postgres@localhost:5432/mb"
+else:
+    raise ValueError("Unsupported database type")
+
+# echo=True: 显示执行的SQL语句
+engine = create_engine(url, echo=True)
+
 Base = declarative_base()
 
 
@@ -15,13 +25,22 @@ int_pk = Annotated[int, mapped_column(primary_key=True, comment="主键")]
 required_unique_name = Annotated[
     str, mapped_column(String(128), unique=True, nullable=False, comment="唯一名称")
 ]
-birthday_date = Annotated[datetime.date, mapped_column(nullable=True, comment="出生日期")]
+birthday_date = Annotated[
+    datetime.date, mapped_column(nullable=True, comment="出生日期")
+]
 # server_default: sql语句中的 default 关键字，数据库默认值
 timestamp_default_now = Annotated[
-    datetime.datetime, mapped_column(nullable=False, server_default=func.now(), comment="创建时间")
+    datetime.datetime,
+    mapped_column(nullable=False, server_default=func.now(), comment="创建时间"),
 ]
 timestamp_update_now = Annotated[
-    datetime.datetime, mapped_column(nullable=False, server_default=func.now(), onupdate=func.now(), comment="更新时间")
+    datetime.datetime,
+    mapped_column(
+        nullable=False,
+        server_default=func.now(),
+        onupdate=func.now(),
+        comment="更新时间",
+    ),
 ]
 # https://www.perplexity.ai/search/import-datetime-from-sqlalchem-o4auT4oDSgKu2q4MTMDeKA
 # default 和 server_default

@@ -11,12 +11,17 @@ from sqlalchemy.orm import (
 from typing_extensions import Annotated
 
 
-class Base(DeclarativeBase):
-    pass
+# database://username:password@hostname:port/database_name
+database_type = "postgresql"
+if database_type == "mysql":
+    url = "mysql://root:root@localhost:3306/mb"
+elif database_type == "postgresql":
+    url = "postgresql://postgres:postgres@localhost:5432/mb"
+else:
+    raise ValueError("Unsupported database type")
 
-
-engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
-engine = create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
+# echo=True: 显示执行的SQL语句
+engine = create_engine(url, echo=True)
 
 
 int_pk = Annotated[int, mapped_column(primary_key=True)]
@@ -25,6 +30,10 @@ required_unique_string = Annotated[
 ]
 required_string = Annotated[str, mapped_column(String(128), nullable=False)]
 timestamp_not_null = Annotated[datetime.datetime, mapped_column(nullable=False)]
+
+
+class Base(DeclarativeBase):
+    pass
 
 
 class Department(Base):
