@@ -8,7 +8,7 @@ with engine.connect() as conn:
     # RMKeyView(['id', 'name', 'birthday'])
     for row in result_set:
         print(row[0], row.name, row.birthday)
-print("-" * 20)
+print("-" * 100)
 # 1 Tom 2000-10-11
 # 2 Jack 2000-10-13
 # 3 Mary 2000-10-14
@@ -21,7 +21,7 @@ with engine.connect() as conn:
     result_set = conn.execute(query)
     rows = result_set.all()
     print(rows)
-print("-" * 20)
+print("-" * 100)
 # [(1, 'Tom', datetime.date(2000, 10, 11)), (2, 'Jack', datetime.date(2000, 10, 13)), (3, 'Mary', datetime.date(2000, 10, 14)), (4, 'Smith', datetime.date(2000, 10, 15))]
 
 
@@ -32,7 +32,7 @@ with engine.connect() as conn:
     # fetchall() == all()
     rows = result_set.fetchall()
     print(rows)
-print("-" * 20)
+print("-" * 100)
 # [(1, 'Tom', datetime.date(2000, 10, 11)), (2, 'Jack', datetime.date(2000, 10, 13)), (3, 'Mary', datetime.date(2000, 10, 14)), (4, 'Smith', datetime.date(2000, 10, 15))]
 
 
@@ -43,5 +43,5 @@ with engine.connect() as conn:
 
     row = result_set.fetchmany(2)
     print(row)
-print("-" * 20)
+print("-" * 100)
 # [(1, 'Tom', datetime.date(2000, 10, 11)), (2, 'Jack', datetime.date(2000, 10, 13))]

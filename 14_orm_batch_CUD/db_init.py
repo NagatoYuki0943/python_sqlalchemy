@@ -10,6 +10,7 @@ class Base(DeclarativeBase):
 
 
 engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
+engine = create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
 
 
 int_pk = Annotated[int, mapped_column(primary_key=True)]

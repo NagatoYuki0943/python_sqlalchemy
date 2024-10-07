@@ -1,4 +1,6 @@
-# pip install sqlalchemy mysqlclient
+# pip install sqlalchemy
+# pip install mysqlclient (for mysql)
+# pip install psycopg2 (for postgres)
 import sqlalchemy
 from sqlalchemy import Engine, Connection, TextClause, CursorResult, Row
 
@@ -6,6 +8,9 @@ from sqlalchemy import Engine, Connection, TextClause, CursorResult, Row
 # echo=True: 显示执行的SQL语句
 engine: Engine = sqlalchemy.create_engine(
     "mysql://root:root@localhost:3306/mb", echo=True
+)
+engine: Engine = sqlalchemy.create_engine(
+    "postgresql://postgres:postgres@localhost:5432/mb", echo=True
 )
 
 # create a connection

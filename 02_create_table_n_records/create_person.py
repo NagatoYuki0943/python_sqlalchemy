@@ -1,6 +1,7 @@
 import sqlalchemy
 
 engine = sqlalchemy.create_engine("mysql://root:root@localhost:3306/mb", echo=True)
+engine = sqlalchemy.create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
 
 # 表数据定义存档在meta_data对象中
 meta_data = sqlalchemy.MetaData()
@@ -12,6 +13,7 @@ person = sqlalchemy.Table(
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
     sqlalchemy.Column("name", sqlalchemy.String(128), unique=True, nullable=False),
     sqlalchemy.Column("birthday", sqlalchemy.Date, nullable=False),
+    sqlalchemy.Column("address", sqlalchemy.String(255), nullable=True),
 )
 
 # 创建表, 默认情况下, 不会尝试重新创建目标数据库中已经存在的表。

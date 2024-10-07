@@ -15,6 +15,7 @@ class Base2(DeclarativeBase):
 
 
 engine = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
+engine = create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
 engine2 = create_engine("mysql://root:root@localhost:3306/mb", echo=True)
 
 

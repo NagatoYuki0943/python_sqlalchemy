@@ -32,3 +32,12 @@ with engine.connect() as conn:
     for row in result_set:
         print(row[0], row.name, row.birthday)
 print("-" * 20)
+# 10 Samuel 1997-01-15
+# 9 Eric 1998-02-18
+# 8 Amy 2000-09-18
+# 6 Jerry 2000-10-17
+# 5 Luck 2000-10-16
+# 4 Smith 2000-10-15
+# 3 Mary 2000-10-14
+# 2 Jack 2000-10-13
+# 1 Tom 2000-10-11

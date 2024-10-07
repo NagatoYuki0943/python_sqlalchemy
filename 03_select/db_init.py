@@ -1,6 +1,7 @@
 import sqlalchemy
 
 engine = sqlalchemy.create_engine("mysql://root:root@localhost:3306/mb", echo=True)
+engine = sqlalchemy.create_engine("postgresql://postgres:postgres@localhost:5432/mb", echo=True)
 
 meta_data = sqlalchemy.MetaData()
 
