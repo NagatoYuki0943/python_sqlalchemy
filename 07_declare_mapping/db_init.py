@@ -21,8 +21,8 @@ class Person(Base):
 # https://www.perplexity.ai/search/import-datetime-from-sqlalchem-o4auT4oDSgKu2q4MTMDeKA
 # default 和 server_default
 #     执行位置：
-#         default: 在SQLAlchemy客户端执行，由Python生成默认值1。
-#         server_default: 在数据库服务器端执行，由数据库生成默认值1。
+#         default: 在SQLAlchemy客户端执行，由Python生成默认值。
+#         server_default: 在数据库服务器端执行，由数据库生成默认值。
 
 #     SQL语句生成：
 #         default: 默认值会被包含在INSERT语句中。
