@@ -10,10 +10,10 @@ meta_data = sqlalchemy.MetaData()
 person = sqlalchemy.Table(
     "person",
     meta_data,
-    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-    sqlalchemy.Column("name", sqlalchemy.String(128), unique=True, nullable=False),
-    sqlalchemy.Column("birthday", sqlalchemy.Date, nullable=False),
-    sqlalchemy.Column("address", sqlalchemy.String(255), nullable=True),
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, comment="主键"),
+    sqlalchemy.Column("name", sqlalchemy.String(128), unique=True, nullable=False, comment="姓名"),
+    sqlalchemy.Column("birthday", sqlalchemy.Date, nullable=False, comment="出生日期"),
+    sqlalchemy.Column("address", sqlalchemy.String(255), nullable=True, comment="地址"),
 )
 
 # 创建表, 默认情况下, 不会尝试重新创建目标数据库中已经存在的表。
