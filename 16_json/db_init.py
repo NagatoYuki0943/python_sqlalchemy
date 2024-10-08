@@ -20,6 +20,9 @@ Base = declarative_base()
 
 
 int_pk = Annotated[int, mapped_column(primary_key=True, comment="主键")]
+json_type = Annotated[
+    list[dict], mapped_column(JSONB if database_type == "postgresql" else JSON)
+]
 
 
 class Json1(Base):
@@ -28,9 +31,7 @@ class Json1(Base):
 
     # 使用 Mapped 类型注解，和 Column 一样，可以指定列的类型和其他属性
     id: Mapped[int_pk]
-    messages: Mapped[list[dict]] = mapped_column(
-        JSONB if database_type == "postgresql" else JSON, comment="消息内容"
-    )
+    messages: Mapped[json_type]
 
     def __repr__(self):
         return f"<Json1(id={self.id}, messages={self.messages})>"
