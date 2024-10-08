@@ -80,3 +80,11 @@ rows = session.query(Person).filter(Person.id > 100)
 for person in rows:
     print(f"id: {person.id}, name: {person.name}, birthday: {person.birthday}")
 print("-" * 100)
+
+
+# filter_by(), 直接填写属性名和值, 支持多个条件
+rows = session.query(Person).filter_by(name="Tom")
+for person in rows:
+    print(f"id: {person.id}, name: {person.name}, birthday: {person.birthday}")
+print("-" * 100)
+# id: 1, name: Tom, birthday: 2000-10-11
