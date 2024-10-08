@@ -83,8 +83,8 @@ class Person(Base):
     name: Mapped[required_unique_name]
     birthday: Mapped[birthday_date]
     address: Mapped[str] = mapped_column(String(128), nullable=True)
-    create_time: Mapped[timestamp_default_now]
-    update_time: Mapped[timestamp_update_now]
+    created_at: Mapped[timestamp_default_now]
+    updated_at: Mapped[timestamp_update_now]
 
 
 Base.metadata.create_all(engine)

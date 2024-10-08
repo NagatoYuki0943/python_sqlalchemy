@@ -27,14 +27,14 @@ person_table = sqlalchemy.Table(
     sqlalchemy.Column("birthday", sqlalchemy.Date, nullable=False, comment="出生日期"),
     sqlalchemy.Column("address", sqlalchemy.String(255), nullable=True, comment="地址"),
     sqlalchemy.Column(
-        "create_time",
+        "created_at",
         sqlalchemy.DateTime,
         nullable=False,
         server_default=sqlalchemy.func.now(),
         comment="创建时间",
     ),
     sqlalchemy.Column(
-        "update_time",
+        "updated_at",
         sqlalchemy.DateTime,
         nullable=False,
         server_default=sqlalchemy.func.now(),

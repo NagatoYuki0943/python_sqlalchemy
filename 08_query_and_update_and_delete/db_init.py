@@ -24,10 +24,10 @@ class Person(Base):
     name = Column(String(128), unique=True, nullable=False, comment="姓名")
     birthday = Column(Date, nullable=False, comment="出生日期")
     address = Column(String(255), nullable=True, comment="地址")
-    create_time = Column(
+    created_at = Column(
         DateTime, nullable=False, server_default=func.now(), comment="创建时间"
     )
-    update_time = Column(
+    updated_at = Column(
         DateTime,
         nullable=False,
         server_default=func.now(),
