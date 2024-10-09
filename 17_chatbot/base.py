@@ -1,5 +1,5 @@
 import datetime
-from sqlalchemy import Integer, String, JSON, func
+from sqlalchemy import Integer, String, Text, JSON, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import declarative_base, mapped_column
 from typing import Annotated
@@ -11,7 +11,8 @@ Base = declarative_base()
 
 
 int_pk = Annotated[int, mapped_column(primary_key=True, comment="主键")]
-string = Annotated[str, mapped_column(String(65536), unique=False, nullable=True)]
+string = Annotated[str, mapped_column(String(256), unique=False, nullable=True)]
+text = Annotated[str, mapped_column(Text, nullable=True)]
 required_string = Annotated[
     str, mapped_column(String(256), unique=False, nullable=False)
 ]

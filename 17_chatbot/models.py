@@ -4,6 +4,7 @@ from base import (
     int_pk,
     required_unique_string,
     string,
+    text,
     timestamp_default_now,
     timestamp_update_now,
 )
@@ -16,7 +17,7 @@ class Model(Base):
     id: Mapped[int_pk]
     model_name: Mapped[required_unique_string]
     version: Mapped[string]
-    desc: Mapped[string]
+    desc: Mapped[text]
     status: Mapped[string]
     created_at: Mapped[timestamp_default_now]
     updated_at: Mapped[timestamp_update_now]

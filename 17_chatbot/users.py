@@ -18,9 +18,9 @@ class User(Base):
     __tablename__ = "chatbot_users"
 
     id: Mapped[int_pk]
-    username: Mapped[required_unique_string]
+    username: Mapped[required_string]
     password: Mapped[required_string]
-    email: Mapped[string]
+    email: Mapped[required_unique_string]
     phone: Mapped[string]
     status: Mapped[string]
     last_login_at: Mapped[datetime.datetime] = mapped_column(

@@ -20,7 +20,7 @@ def insert_records(session):
     if existing_user1:
         user1 = existing_user1
     else:
-        user1 = User(username="Tom", password="123456")
+        user1 = User(username="Tom", password="123456", email="123@qq.com")
         # 这一行可以省略, 添加 Employee 时会自动添加 department
         session.add(user1)
 
@@ -30,7 +30,7 @@ def insert_records(session):
     if existing_user2:
         user2 = existing_user2
     else:
-        user2 = User(username="Jerry", password="123456")
+        user2 = User(username="Jerry", password="123456", email="456@qq.com")
         # 这一行可以省略, 添加 Employee 时会自动添加 department
         session.add(user2)
 
@@ -76,14 +76,14 @@ def select_records(session):
         print()
 
 
-# <User(id=1, username='Tom', email='None', phone='None', status='None', conversation_num=2)>
+# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', conversation_num=2)>
 # <Conversation(id=1, user_id=1, model_id=1, messages=[{'role': 'user', 'user': '你好'}, {'role': 'assistant', 'user': '你好, 我可以为你做什么?'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
 # <Conversation(id=2, user_id=1, model_id=1, messages=[{'role': 'user', 'user': '苹果好吃吗?'}, {'role': 'assistant', 'user': '苹果很好吃, 而且营养价值很高!'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
-# <User(id=2, username='Jerry', email='None', phone='None', status='None', conversation_num=1)>
+# <User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', conversation_num=1)>
 # <Conversation(id=3, user_id=2, model_id=1, messages=[{'role': 'user', 'user': '苹果好吃吗?'}, {'role': 'assistant', 'user': '苹果很好吃, 而且营养价值很高!'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
 
 
 session = Session()
 
-# insert_records(session)
+insert_records(session)
 select_records(session)
