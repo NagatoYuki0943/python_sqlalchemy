@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from base import (
+from ..database_utils import (
     Base,
     int_pk,
     string,
@@ -12,8 +12,8 @@ from base import (
 from typing import TYPE_CHECKING  # for type hinting, 可以解决循环导入问题
 
 if TYPE_CHECKING:
-    from users import User
-    from models import Model
+    from ..users import User
+    from ..models import Model
 
 
 class Conversation(Base):

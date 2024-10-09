@@ -1,4 +1,4 @@
-from main import Session, User, Model, Conversation
+from app import Session, User, Model, Conversation
 
 
 messages1 = [

@@ -1,13 +1,10 @@
 import datetime
 from sqlalchemy import Integer, String, Text, JSON, func
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import declarative_base, mapped_column
+from sqlalchemy.orm import mapped_column
 from typing import Annotated
 
-from database import database_type
-
-
-Base = declarative_base()
+from .database import database_type
 
 
 int_pk = Annotated[int, mapped_column(primary_key=True, comment="主键")]

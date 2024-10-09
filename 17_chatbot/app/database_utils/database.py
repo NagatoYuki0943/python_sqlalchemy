@@ -1,5 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
 
 
 database_type = "postgresql"
@@ -12,3 +13,4 @@ else:
 
 engine = create_engine(url, echo=True)
 Session = sessionmaker(bind=engine)
+Base = declarative_base()
