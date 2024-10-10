@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Mapped, relationship
-from ..database_utils import (
+from ..core import (
     Base,
     int_pk,
     required_unique_string,
@@ -8,7 +8,7 @@ from ..database_utils import (
     timestamp_default_now,
     timestamp_update_now,
 )
-from ..conversations import Conversation
+from .conversations import Conversation
 
 
 class Model(Base):
