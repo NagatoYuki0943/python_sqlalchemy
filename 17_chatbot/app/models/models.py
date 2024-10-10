@@ -8,10 +8,10 @@ from ..core import (
     timestamp_default_now,
     timestamp_update_now,
 )
-from .conversations import Conversation
+from .conversations import ConversationDB
 
 
-class Model(Base):
+class ModelDB(Base):
     __tablename__ = "chatbot_models"
 
     id: Mapped[int_pk]
@@ -23,8 +23,8 @@ class Model(Base):
     updated_at: Mapped[timestamp_update_now]
 
     # 关联字段
-    conversations: Mapped[list[Conversation]] = relationship(
-        Conversation, back_populates="model"
+    conversations: Mapped[list[ConversationDB]] = relationship(
+        ConversationDB, back_populates="model"
     )
 
     def __repr__(self):

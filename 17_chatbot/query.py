@@ -1,4 +1,4 @@
-from app import Session, User, Model, Conversation
+from app import Session, UserDB, ModelDB, ConversationDB
 
 
 messages1 = [
@@ -14,48 +14,48 @@ messages2 = [
 
 def insert_records(session):
     # Check if the user already exists
-    existing_user1: User = (
-        session.query(User).filter(User.username == "Tom").one_or_none()
+    existing_user1: UserDB = (
+        session.query(UserDB).filter(UserDB.username == "Tom").one_or_none()
     )
     if existing_user1:
         user1 = existing_user1
     else:
-        user1 = User(username="Tom", password="123456", email="123@qq.com")
+        user1 = UserDB(username="Tom", password="123456", email="123@qq.com")
         # 这一行可以省略, 添加 Employee 时会自动添加 department
         session.add(user1)
 
-    existing_user2: User = (
-        session.query(User).filter(User.username == "Jerry").one_or_none()
+    existing_user2: UserDB = (
+        session.query(UserDB).filter(UserDB.username == "Jerry").one_or_none()
     )
     if existing_user2:
         user2 = existing_user2
     else:
-        user2 = User(username="Jerry", password="123456", email="456@qq.com")
+        user2 = UserDB(username="Jerry", password="123456", email="456@qq.com")
         # 这一行可以省略, 添加 Employee 时会自动添加 department
         session.add(user2)
 
-    existing_model: Model = (
-        session.query(Model).filter(Model.model_name == "gpt4o").one_or_none()
+    existing_model: ModelDB = (
+        session.query(ModelDB).filter(ModelDB.model_name == "gpt4o").one_or_none()
     )
     if existing_model:
         model = existing_model
     else:
-        model = Model(model_name="gpt4o", version="2407", desc="GPT-40 by OpenAI")
+        model = ModelDB(model_name="gpt4o", version="2407", desc="GPT-40 by OpenAI")
         session.add(model)
 
-    conversaton1 = Conversation(
+    conversaton1 = ConversationDB(
         messages=messages1,
         user=user1,
         model=model,
     )
 
-    conversaton2 = Conversation(
+    conversaton2 = ConversationDB(
         messages=messages2,
         user=user1,
         model=model,
     )
 
-    conversaton3 = Conversation(
+    conversaton3 = ConversationDB(
         messages=messages2,
         user=user2,
         model=model,
@@ -68,7 +68,7 @@ def insert_records(session):
 
 def select_records(session):
     # 查询所有用户
-    users = session.query(User).all()
+    users = session.query(UserDB).all()
     for user in users:
         print(user)
         for conversation in user.conversations:

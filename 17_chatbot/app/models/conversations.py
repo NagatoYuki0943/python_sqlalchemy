@@ -12,11 +12,11 @@ from ..core import (
 from typing import TYPE_CHECKING  # for type hinting, 可以解决循环导入问题
 
 if TYPE_CHECKING:
-    from .users import User
-    from .models import Model
+    from .users import UserDB
+    from .models import ModelDB
 
 
-class Conversation(Base):
+class ConversationDB(Base):
     __tablename__ = "chatbot_conversations"
 
     id: Mapped[int_pk]
@@ -30,8 +30,8 @@ class Conversation(Base):
     updated_at: Mapped[timestamp_update_now]
 
     # 关联字段
-    user: Mapped["User"] = relationship("User", back_populates="conversations")
-    model: Mapped["Model"] = relationship("Model", back_populates="conversations")
+    user: Mapped["UserDB"] = relationship("UserDB", back_populates="conversations")
+    model: Mapped["ModelDB"] = relationship("ModelDB", back_populates="conversations")
 
     def __repr__(self):
         return f"<Conversation(id={self.id}, user_id={self.user_id}, model_id={self.model_id}, messages={self.messages}, input_tokens_sum={self.input_tokens_sum}, output_tokens_sum={self.output_tokens_sum}, status='{self.status}')>"

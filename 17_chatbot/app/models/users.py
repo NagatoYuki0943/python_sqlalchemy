@@ -9,10 +9,10 @@ from ..core import (
     timestamp_default_now,
     timestamp_update_now,
 )
-from .conversations import Conversation
+from .conversations import ConversationDB
 
 
-class User(Base):
+class UserDB(Base):
     # 表名
     __tablename__ = "chatbot_users"
 
@@ -29,8 +29,8 @@ class User(Base):
     updated_at: Mapped[timestamp_update_now]
 
     # 关联字段
-    conversations: Mapped[list[Conversation]] = relationship(
-        Conversation, back_populates="user"
+    conversations: Mapped[list[ConversationDB]] = relationship(
+        ConversationDB, back_populates="user"
     )
 
     def __repr__(self):
