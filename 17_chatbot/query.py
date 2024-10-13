@@ -2,13 +2,13 @@ from app import Session, UserDB, ModelDB, ConversationDB, get_password_hash
 
 
 messages1 = [
-    {"role": "user", "user": "你好"},
-    {"role": "assistant", "user": "你好, 我可以为你做什么?"},
+    {"role": "user", "content": "你好"},
+    {"role": "assistant", "content": "你好, 我可以为你做什么?"},
 ]
 
 messages2 = [
-    {"role": "user", "user": "苹果好吃吗?"},
-    {"role": "assistant", "user": "苹果很好吃, 而且营养价值很高!"},
+    {"role": "user", "content": "苹果好吃吗?"},
+    {"role": "assistant", "content": "苹果很好吃, 而且营养价值很高!"},
 ]
 
 
@@ -47,22 +47,34 @@ def insert_records(session):
         model = ModelDB(model_name="gpt4o", version="2407", desc="GPT-40 by OpenAI")
         session.add(model)
 
+    input_tokens = sum([len(messages["content"]) for messages in messages1[:-1]])
+    output_tokens = len(messages1[-1]["content"])
     conversaton1 = ConversationDB(
         messages=messages1,
         user=user1,
         model=model,
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
     )
 
+    input_tokens = sum([len(messages["content"]) for messages in messages2[:-1]])
+    output_tokens = len(messages2[-1]["content"])
     conversaton2 = ConversationDB(
         messages=messages2,
         user=user1,
         model=model,
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
     )
 
+    input_tokens = sum([len(messages["content"]) for messages in messages2[:-1]])
+    output_tokens = len(messages2[-1]["content"])
     conversaton3 = ConversationDB(
         messages=messages2,
         user=user2,
         model=model,
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
     )
 
     session.add_all([conversaton1, conversaton2, conversaton3])
@@ -80,11 +92,11 @@ def select_records(session):
         print()
 
 
-# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', uuid='7d928c2a-63ed-4ddd-8a08-1f38a25b98fe', created_at='2024-10-13 15:48:01.193351', updated_at='2024-10-13 15:48:01.193351', deleted_at='None', conversation_num=2)>
-# <Conversation(id=1, user_id=1, model_id=1, messages=[{'role': 'user', 'user': '你好'}, {'role': 'assistant', 'user': '你好, 我可以为你做什么?'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
-# <Conversation(id=2, user_id=1, model_id=1, messages=[{'role': 'user', 'user': '苹果好吃吗?'}, {'role': 'assistant', 'user': '苹果很好吃, 而且营养价值很高!'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
-# User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', uuid='8763adc6-cb7d-40bd-8066-ad9f00464cc2', created_at='2024-10-13 15:48:01.193351', updated_at='2024-10-13 15:48:01.193351', deleted_at='None', conversation_num=1)>
-# <Conversation(id=3, user_id=2, model_id=1, messages=[{'role': 'user', 'user': '苹果好吃吗?'}, {'role': 'assistant', 'user': '苹果很好吃, 而且营养价值很高!'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
+# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', uuid='f3405298-e93f-4e44-aa0a-c0336d459ff8', created_at='2024-10-13 20:33:18.170217', updated_at='2024-10-13 20:33:18.170217', deleted_at='None', conversation_num=2)>
+# <Conversation(id=1, user_id=1, model_id=1, messages=[{'role': 'user', 'content': '你好'}, {'role': 'assistant', 'content': '你好, 我可以为你做什么?'}], input_tokens=2, output_tokens=13, status='None')>
+# <Conversation(id=2, user_id=1, model_id=1, messages=[{'role': 'user', 'content': '苹果好吃吗?'}, {'role': 'assistant', 'content': '苹果很好吃, 而且营养价值很高!'}], input_tokens=6, output_tokens=16, status='None')>
+# <User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', uuid='3ccfe050-5878-43c3-86ec-afb5e52bd349', created_at='2024-10-13 20:33:18.170217', updated_at='2024-10-13 20:33:18.170217', deleted_at='None', conversation_num=1)>
+# <Conversation(id=3, user_id=2, model_id=1, messages=[{'role': 'user', 'content': '苹果好吃吗?'}, {'role': 'assistant', 'content': '苹果很好吃, 而且营养价值很高!'}], input_tokens=6, output_tokens=16, status='None')>
 
 
 session = Session()
