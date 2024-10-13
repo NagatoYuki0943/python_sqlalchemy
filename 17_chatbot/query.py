@@ -1,4 +1,4 @@
-from app import Session, UserDB, ModelDB, ConversationDB
+from app import Session, UserDB, ModelDB, ConversationDB, get_password_hash
 
 
 messages1 = [
@@ -20,7 +20,9 @@ def insert_records(session):
     if existing_user1:
         user1 = existing_user1
     else:
-        user1 = UserDB(username="Tom", password="123456", email="123@qq.com")
+        user1 = UserDB(
+            username="Tom", password=get_password_hash("123456"), email="123@qq.com"
+        )
         # 这一行可以省略, 添加 Employee 时会自动添加 department
         session.add(user1)
 
@@ -30,7 +32,9 @@ def insert_records(session):
     if existing_user2:
         user2 = existing_user2
     else:
-        user2 = UserDB(username="Jerry", password="123456", email="456@qq.com")
+        user2 = UserDB(
+            username="Jerry", password=get_password_hash("123456"), email="456@qq.com"
+        )
         # 这一行可以省略, 添加 Employee 时会自动添加 department
         session.add(user2)
 
@@ -68,7 +72,7 @@ def insert_records(session):
 
 def select_records(session):
     # 查询所有用户
-    users = session.query(UserDB).all()
+    users: list[UserDB] = session.query(UserDB).all()
     for user in users:
         print(user)
         for conversation in user.conversations:
@@ -76,10 +80,10 @@ def select_records(session):
         print()
 
 
-# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', conversation_num=2)>
+# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', uuid='7d928c2a-63ed-4ddd-8a08-1f38a25b98fe', created_at='2024-10-13 15:48:01.193351', updated_at='2024-10-13 15:48:01.193351', deleted_at='None', conversation_num=2)>
 # <Conversation(id=1, user_id=1, model_id=1, messages=[{'role': 'user', 'user': '你好'}, {'role': 'assistant', 'user': '你好, 我可以为你做什么?'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
 # <Conversation(id=2, user_id=1, model_id=1, messages=[{'role': 'user', 'user': '苹果好吃吗?'}, {'role': 'assistant', 'user': '苹果很好吃, 而且营养价值很高!'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
-# <User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', conversation_num=1)>
+# User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', uuid='8763adc6-cb7d-40bd-8066-ad9f00464cc2', created_at='2024-10-13 15:48:01.193351', updated_at='2024-10-13 15:48:01.193351', deleted_at='None', conversation_num=1)>
 # <Conversation(id=3, user_id=2, model_id=1, messages=[{'role': 'user', 'user': '苹果好吃吗?'}, {'role': 'assistant', 'user': '苹果很好吃, 而且营养价值很高!'}], input_tokens_sum=0, output_tokens_sum=0, status='None')>
 
 
