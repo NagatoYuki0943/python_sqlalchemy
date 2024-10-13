@@ -47,7 +47,7 @@ def insert_records(session):
         model = ModelDB(model_name="gpt4o", version="2407", desc="GPT-40 by OpenAI")
         session.add(model)
 
-    input_tokens = sum([len(messages["content"]) for messages in messages1[:-1]])
+    input_tokens = sum(len(message["content"]) for message in messages1[:-1])
     output_tokens = len(messages1[-1]["content"])
     conversaton1 = ConversationDB(
         messages=messages1,
@@ -57,7 +57,7 @@ def insert_records(session):
         output_tokens=output_tokens,
     )
 
-    input_tokens = sum([len(messages["content"]) for messages in messages2[:-1]])
+    input_tokens = sum(len(message["content"]) for message in messages2[:-1])
     output_tokens = len(messages2[-1]["content"])
     conversaton2 = ConversationDB(
         messages=messages2,
@@ -67,7 +67,7 @@ def insert_records(session):
         output_tokens=output_tokens,
     )
 
-    input_tokens = sum([len(messages["content"]) for messages in messages2[:-1]])
+    input_tokens = sum(len(message["content"]) for message in messages2[:-1])
     output_tokens = len(messages2[-1]["content"])
     conversaton3 = ConversationDB(
         messages=messages2,
