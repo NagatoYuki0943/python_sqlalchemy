@@ -1,8 +1,29 @@
 from db_init import Session, Person
-from sqlalchemy.orm import load_only
 
 
 session = Session()
+
+
+# get(id) 根据id获取一条记录
+person = session.query(Person).get(1)
+if person:
+    print(f"id: {person.id}, name: {person.name}, birthday: {person.birthday}")
+print("-" * 100)
+# id: 1, name: Tom, birthday: 2000-10-11
+
+
+# 找不到数据时, get(id) 返回 None
+person = session.query(Person).get(0)
+if person:
+    print(f"id: {person.id}, name: {person.name}, birthday: {person.birthday}")
+print("-" * 100)
+
+
+# 找不到数据时, get(None) 返回 None
+person = session.query(Person).get(None)
+if person:
+    print(f"id: {person.id}, name: {person.name}, birthday: {person.birthday}")
+print("-" * 100)
 
 
 # first() 返回第一条记录(结果集中可能有多条记录)
