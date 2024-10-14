@@ -4,6 +4,7 @@ from ..core import (
     Base,
     int_pk,
     string,
+    text,
     default_zero_int,
     json_type,
     timestamp,
@@ -23,7 +24,9 @@ class ConversationDB(Base):
     id: Mapped[int_pk]
     user_id: Mapped[int] = mapped_column(ForeignKey("chatbot_users.id"))
     model_id: Mapped[int] = mapped_column(ForeignKey("chatbot_models.id"))
+    title: Mapped[string]
     messages: Mapped[json_type]
+    desc: Mapped[text]
     input_tokens: Mapped[default_zero_int]
     output_tokens: Mapped[default_zero_int]
     status: Mapped[string]
