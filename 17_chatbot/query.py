@@ -91,12 +91,11 @@ def select_records(session):
             print(conversation)
         print()
 
-
-# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', uuid='f3405298-e93f-4e44-aa0a-c0336d459ff8', created_at='2024-10-13 20:33:18.170217', updated_at='2024-10-13 20:33:18.170217', deleted_at='None', conversation_num=2)>
-# <Conversation(id=1, user_id=1, model_id=1, messages=[{'role': 'user', 'content': '你好'}, {'role': 'assistant', 'content': '你好, 我可以为你做什么?'}], input_tokens=2, output_tokens=13, status='None')>
-# <Conversation(id=2, user_id=1, model_id=1, messages=[{'role': 'user', 'content': '苹果好吃吗?'}, {'role': 'assistant', 'content': '苹果很好吃, 而且营养价值很高!'}], input_tokens=6, output_tokens=16, status='None')>
-# <User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', uuid='3ccfe050-5878-43c3-86ec-afb5e52bd349', created_at='2024-10-13 20:33:18.170217', updated_at='2024-10-13 20:33:18.170217', deleted_at='None', conversation_num=1)>
-# <Conversation(id=3, user_id=2, model_id=1, messages=[{'role': 'user', 'content': '苹果好吃吗?'}, {'role': 'assistant', 'content': '苹果很好吃, 而且营养价值很高!'}], input_tokens=6, output_tokens=16, status='None')>
+# <User(id=1, username='Tom', email='123@qq.com', phone='None', status='None', uuid='71452150-9c80-43dd-a3c9-11e3e1e19aa9', created_at='2024-10-14 19:26:06.679056', updated_at='2024-10-14 19:26:06.679056', deleted_at='None', conversation_num=2)>
+# <Conversation(id=1, user_id=1, model_id=1, title='None', messages=[{'role': 'user', 'content': '你好'}, {'role': 'assistant', 'content': '你好, 我可以为你做什么?'}], desc='None', input_tokens=2, output_tokens=13, status='None')>
+# <Conversation(id=2, user_id=1, model_id=1, title='None', messages=[{'role': 'user', 'content': '苹果好吃吗?'}, {'role': 'assistant', 'content': '苹果很好吃, 而且营养价值很高!'}], desc='None', input_tokens=6, output_tokens=16, status='None')>
+# <User(id=2, username='Jerry', email='456@qq.com', phone='None', status='None', uuid='91921e6d-4424-4a4b-b354-f98a7a00a4cf', created_at='2024-10-14 19:26:06.679056', updated_at='2024-10-14 19:26:06.679056', deleted_at='None', conversation_num=1)>
+# <Conversation(id=3, user_id=2, model_id=1, title='None', messages=[{'role': 'user', 'content': '苹果好吃吗?'}, {'role': 'assistant', 'content': '苹果很好吃, 而且营养价值很高!'}], desc='None', input_tokens=6, output_tokens=16, status='None')>
 
 
 session = Session()
