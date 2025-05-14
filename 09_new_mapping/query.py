@@ -13,6 +13,5 @@ session.flush()
 
 time.sleep(5)
 
-
 session.query(Person).filter_by(name="Perfume").update({"birthday": "2000-10-2"})
 session.commit()
