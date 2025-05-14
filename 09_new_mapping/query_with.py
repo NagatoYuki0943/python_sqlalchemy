@@ -2,6 +2,7 @@ import time
 from db_init import Session, Person
 
 
+# with Session() as session: 语法会在代码块结束时自动调用 session.close()，无论是否发生异常。
 with Session() as session:
     c = Person(name="Perfume", birthday="2000-10-1")
 
